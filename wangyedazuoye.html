@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            min-height: 200vh;
+            background-image: radial-gradient(#22332a 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 32px;
+            z-index: 999;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .nav-list {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-item {
+            position: relative;
+            color: #ccc;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 6px 0;
+        }
+        .nav-item > a:hover {
+            color: #fff;
+        }
+        .hot-tag {
+            background: #009944;
+            font-size: 10px;
+            padding: 1px 4px;
+            border-radius: 2px;
+            margin-left: 4px;
+        }
+        .product-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background-color: #171717;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+            margin-top: 12px;
+        }
+        .nav-item:hover .product-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: background-color 0.2s ease;
+        }
+        .dropdown-item:hover {
+            background-color: #2a2a2a;
+        }
+        .item-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .new-tag {
+            background: #009688;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .item-desc {
+            font-size: 12px;
+            color: #999;
+        }
+        .nav-right {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-login {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-login:hover {
+            background-color: #333;
+        }
+        .btn-download-center {
+            background-color: #26e077;
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-download-center:hover {
+            background-color: #22c96b;
+        }
+        .hero {
+            margin-top: 80px;
+            padding: 60px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            min-height: calc(100vh - 80px);
+        }
+        .hero-left h1 {
+            font-size: 72px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.1;
+        }
+        .hero-left p {
+            font-size: 60px;
+            color: #b8b8b8;
+        }
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .hero-desc {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-work {
+            background-color: #26e077;
+            color: #000;
+            border: none;
+            padding: 14px 26px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-work:hover {
+            background-color: #22c96b;
+        }
+        .btn-ide {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 14px 26px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-ide:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .web-link {
+            font-size: 13px;
+            color: #aaa;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .banner-section {
+            width: 100%;
+            background-color: #0a0a0a;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+        .banner-title {
+            font-size: 72px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .banner-title .text-white {
+            color: #ffffff;
+        }
+        .banner-title .text-gradient {
+            background: linear-gradient(90deg, #26e077, #89f8c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .beta-tag {
+            font-size: 32px;
+            color: #26e077;
+            border: 2px solid #26e077;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+        .banner-sub {
+            font-size: 28px;
+            color: #b0b8c4;
+            text-align: center;
+        }
+        .banner-btn {
+            background-color: #26e077;
+            border: none;
+            color: #000;
+            font-size: 22px;
+            font-weight: 500;
+            padding: 20px 60px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .banner-btn:hover {
+            background-color: #22c96b;
+        }
+        .video-section {
+            width: 100%;
+            background-color: #0a0a0a;
+            padding: 0 20px 80px;
+            display: flex;
+            justify-content: center;
+        }
+        .video-wrap {
+            width: 100%;
+            max-width: 1200px;
+        }
+        .video-wrap video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        .work-page {
+            max-width: 920px;
+            margin: 0 auto;
+            padding-top: 120px;
+            padding-left: 24px;
+            padding-right: 24px;
+            display: none;
+        }
+        .title-box {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title-top {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .text-green {
+            background: linear-gradient(90deg, #26e077, #89f8c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .beta-box {
+            border: 1px solid #26e077;
+            font-size: 12px;
+            padding: 2px 6px;
+            color: #26e077;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+        .title-main {
+            font-size: 64px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+        .input-card {
+            background: #121212;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        #prompt-input {
+            width: 100%;
+            min-height: 140px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 20px;
+            resize: none;
+        }
+        #prompt-input::placeholder {
+            color: #666;
+            font-size: 20px;
+        }
+        .input-bottom-bar {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tool-left {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .tool-icon {
+            width:24px;
+            height:24px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            fill:#fff;
+        }
+        .at-icon {
+            font-size:16px;
+        }
+        .tool-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .tool-icon {
+            color: #999;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            stroke: #999;
+            stroke-width: 1.8;
+            fill: none;
+        }
+        .tool-icon:hover {
+            stroke: #26e077;
+        }
+        .send-btn {
+            width: 46px;
+            height: 46px;
+            background: #1a3828;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .send-btn svg {
+            stroke: #fff;
+            stroke-width: 2;
+            fill: none;
+            width: 22px;
+            height: 22px;
+        }
+        .send-btn:hover {
+            background: #224d36;
+        }
+        .card-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .demo-card {
+            flex: 1 1 calc(50% - 8px);
+            background: #121212;
+            border-radius: 6px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .demo-card:hover {
+            background: #1c1c1c;
+        }
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            background: #222;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+        }
+        .card-icon img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        .card-text {
+            font-size: 14px;
+            color: #ddd;
+        }
+        .gradient-footer-block {
+            width: 100%;
+            height: 130px;
+            background: linear-gradient(to top, #10271b, transparent);
+            border-radius: 8px 8px 0 0;
+        }
+        .home-page {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-left">
+            <div class="logo">TRAE</div>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#">产品 ∨</a>
+                    <div class="product-dropdown">
+                        <a href="#work" class="dropdown-item">
+                            <div class="item-title">
+                                <span>TRAE Work</span>
+                                <span class="new-tag">New</span>
+                            </div>
+                            <div class="item-desc">AI 工作助手</div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="item-title">TRAE IDE</div>
+                            <div class="item-desc">AI 专业编程工具</div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="item-title">TRAE 插件</div>
+                            <div class="item-desc">AI 编码助手</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#">企业版</a></li>
+                <li class="nav-item"><a href="dingjia.html">定价</a></li>
+                <li class="nav-item"><a href="#">文档</a></li>
+                <li class="nav-item"><a href="hsiyan.html">更新日志</a></li>
+                <li class="nav-item"><a href="#">社区</a></li>
+                <li class="nav-item"><a href="#">创造力大赛 <span class="hot-tag">Hot</span></a></li>
+            </ul>
+        </div>
+        <div class="nav-right" id="navMain">
+            <button class="btn-login">登录</button>
+            <button class="btn-download-center">下载中心</button>
+        </div>
+    </header>
+    <div class="home-page">
+        <section class="hero">
+            <div class="hero-left">
+                <h1>TRAE</h1>
+                <p>智能无限，协作无间</p>
+            </div>
+            <div class="hero-right">
+                <div class="hero-desc">
+                    <p>TRAE Work：全新上线的智能工作助手</p>
+                    <p>TRAE IDE：你的专属 AI 开发工程师</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn-work">下载 TRAE Work</button>
+                    <button class="btn-ide">下载 TRAE IDE</button>
+                </div>
+                <a href="#work" class="web-link">TRAE Work 网页版 ></a>
+            </div>
+        </section>
+        <section class="banner-section">
+            <h2 class="banner-title">
+                <span class="text-white">全新</span>
+                <span class="text-gradient">TRAE Work</span>
+                <span class="beta-tag">Beta</span>
+            </h2>
+            <p class="banner-sub">桌面端、网页版和移动端全量上线</p>
+            <button class="banner-btn">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                即刻探索 TRAE Work
+            </button>
+        </section>
+        <section class="video-section">
+            <div class="video-wrap">
+                <video controls autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23121a2a'/%3E%3C/svg%3E">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+        </section>
+    </div>
+    <div class="work-page">
+        <div class="title-box">
+            <div class="title-top">
+                <span class="text-green">全新 TRAE Work</span>
+                <span class="beta-box">BETA</span>
+            </div>
+            <h1 class="title-main">不止于码 大有可为</h1>
+        </div>
+        <div class="input-card">
+            <textarea id="prompt-input" placeholder="描述你想做的事，剩下的交给 TRAE Work"></textarea>
+            <div class="input-bottom-bar">
+                <div class="tool-left">
+                    <span class="tool-icon at-icon">@</span>
+                    <svg class="tool-icon" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="16" y1="6" x2="8" y2="18"/>
+                    </svg>
+                    <svg class="tool-icon" viewBox="0 0 24 24">
+                        <path d="M18 14V6a4 4 0 0 0-8 0v10a2 2 0 0 0 4 0V6"/>
+                    </svg>
+                </div>
+                <div class="tool-right">
+                    <svg class="tool-icon" viewBox="0 0 24 24">
+                        <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10a7 7 0 0 1-14 0M12 17v4M8 21h8"/>
+                    </svg>
+                    <button class="send-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 19V5M5 12l7-7 7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-wrap">
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/qas.png" alt="论文">
+                </div>
+                <div class="card-text">研读论文，产出论文综述</div>
+            </div>
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/wsd.png" alt="PPT调研">
+                </div>
+                <div class="card-text">调研各个短视频平台，生成汇报PPT</div>
+            </div>
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/edf.png" alt="数据趋势">
+                </div>
+                <div class="card-text">挖掘AI市场的数据，分析数据趋势</div>
+            </div>
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/rfg.png" alt="网站开发">
+                </div>
+                <div class="card-text">开发一个多语言学习网站</div>
+            </div>
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/tgh.png" alt="项目数据分析">
+                </div>
+                <div class="card-text">分析这个项目仓库，生成code wiki</div>
+            </div>
+            <div class="demo-card">
+                <div class="card-icon">
+                    <img src="images/yhj.png" alt="机甲游戏">
+                </div>
+                <div class="card-text">创作一个像素风机甲对战游戏</div>
+            </div>
+        </div>
+        <div class="gradient-footer-block"></div>
+    </div>
+    <script>
+        const navWrap = document.getElementById('navMain');
+        const htmlDefault = `<button class="btn-login">登录</button><button class="btn-download-center">下载中心</button>`;
+        const htmlWork = `<button class="btn-download-center">下载中心</button><button class="btn-login">登录</button>`;
+        function switchPage() {
+            const hash = window.location.hash;
+            const home = document.querySelector('.home-page');
+            const work = document.querySelector('.work-page');
+            if (hash === '#work') {
+                home.style.display = 'none';
+                work.style.display = 'block';
+                document.body.style.minHeight = '100vh';
+                navWrap.innerHTML = htmlWork;
+            } else {
+                home.style.display = 'block';
+                work.style.display = 'none';
+                document.body.style.minHeight = '200vh';
+                navWrap.innerHTML = htmlDefault;
+            }
+        }
+        window.addEventListener('hashchange', switchPage);
+        window.addEventListener('load', switchPage);
+    </script>
+</body>
+</html>
