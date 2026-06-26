@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>网上书城-注册新用户</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            padding: 30px;
+        }
+        .book-box {
+            width: 500px;
+            border: 1px solid #666;
+        }
+        .top-title {
+            background: #444;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            letter-spacing: 8px;
+        }
+        .form-wrap {
+            margin: 15px;
+            border: 1px solid #aaa;
+        }
+        .form-head {
+            background: #e8e8e8;
+            padding: 6px 10px;
+            border-bottom: 1px solid #aaa;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 220px;
+            padding: 4px;
+            border: 1px solid #999;
+        }
+        .submit-btn {
+            width: 100%;
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="book-box">
+        <!-- 顶部标题栏 -->
+        <div class="top-title">网 上 书 城</div>
+
+        <!-- 注册表单区域 -->
+        <div class="form-wrap">
+            <div class="form-head">✚ 注册新用户</div>
+            <form action="#" method="post">
+                <table>
+                    <tr>
+                        <td><label>👤 用户名</label></td>
+                        <td><input type="text" name="username"></td>
+                    </tr>
+                    <tr>
+                        <td><label>🔐 密码</label></td>
+                        <td><input type="password" name="pwd"></td>
+                    </tr>
+                    <tr>
+                        <td><label>🔐 确认密码</label></td>
+                        <td><input type="password" name="repwd"></td>
+                    </tr>
+                    <tr>
+                        <td><label>📩 电子邮件</label></td>
+                        <td><input type="email" name="email"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="注册新用户" class="submit-btn">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

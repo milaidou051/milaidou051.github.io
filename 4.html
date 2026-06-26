@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性布局焦点图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 外层轮播容器 flex弹性布局 */
+        .banner-wrap {
+            width: 900px;
+            height: 360px;
+            margin: 50px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        /* 轮播主海报图 */
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* 左右箭头容器 flex居中 */
+        .arrow {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .left-arrow {
+            position: absolute;
+            left: 20px;
+        }
+        .right-arrow {
+            position: absolute;
+            right: 20px;
+        }
+        /* 箭头图片统一尺寸 */
+        .arrow img {
+            width: 100%;
+            height: 100%;
+        }
+        /* 底部圆点容器 flex水平居中横向排列 */
+        .dot-box {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        /* 圆点图片尺寸 */
+        .dot img {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
+        /* 隐藏未激活圆点、显示激活圆点 */
+        .dot .dot-active {
+            display: none;
+        }
+        .dot.active .dot-normal {
+            display: none;
+        }
+        .dot.active .dot-active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner-wrap">
+        <!-- 左箭头（图片素材） -->
+        <div class="arrow left-arrow">
+            <img src="images/left.png" alt="左切换箭头">
+        </div>
+
+        <!-- 主焦点图海报 -->
+        <img src="images/earthday.jpg" alt="地球日海报" class="banner-img">
+
+        <!-- 右箭头（图片素材） -->
+        <div class="arrow right-arrow">
+            <img src="images/right.png" alt="右切换箭头">
+        </div>
+
+        <!-- 底部圆点指示器，图片素材实现 -->
+        <div class="dot-box">
+            <div class="dot">
+                <img class="dot-normal" src="images/dot-normal.png" alt="普通圆点">
+                <img class="dot-active" src="images/dot-active.png" alt="激活圆点">
+            </div>
+            <div class="dot active">
+                <img class="dot-normal" src="images/dot-normal.png" alt="普通圆点">
+                <img class="dot-active" src="images/dot-active.png" alt="激活圆点">
+            </div>
+            <div class="dot">
+                <img class="dot-normal" src="images/dot-normal.png" alt="普通圆点">
+                <img class="dot-active" src="images/dot-active.png" alt="激活圆点">
+            </div>
+            <div class="dot">
+                <img class="dot-normal" src="images/dot-normal.png" alt="普通圆点">
+                <img class="dot-active" src="images/dot-normal.png" alt="激活圆点">
+            </div>
+        </div>
+    </div>
+
+    <!-- 简易切换JS（点击圆点切换高亮素材图） -->
+    <script>
+        const dotList = document.querySelectorAll('.dot');
+        dotList.forEach(item => {
+            item.addEventListener('click', () => {
+                dotList.forEach(d => d.classList.remove('active'));
+                item.classList.add('active');
+            })
+        })
+    </script>
+</body>
+</html>

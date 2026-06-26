@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>播放器图标</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            /* 页面大渐变背景 */
+            background: linear-gradient(#6b4877, #d8b9d3, #6b4877);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 外层大盒子 最外层圆角方块 */
+        .outer-box {
+            width: 320px;
+            height: 320px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #996688, #704964);
+            /* 盒子阴影立体效果 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 中层黑色边框盒子 */
+        .middle-box {
+            width: 220px;
+            height: 220px;
+            background: #221a22;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 内层渐变画面盒子 */
+        .inner-box {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #ffbc9f, #b86878);
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 白色圆形容器 */
+        .circle {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 播放三角 纯CSS边框制作三角形 */
+        .play-tri {
+            width: 0;
+            height: 0;
+            border-top: 24px solid transparent;
+            border-bottom: 24px solid transparent;
+            border-left: 40px solid #221a22;
+        }
+    </style>
+</head>
+<body>
+    <!-- 多层嵌套盒子，符合盒子模型练习要求 -->
+    <div class="outer-box">
+        <div class="middle-box">
+            <div class="inner-box">
+                <div class="circle">
+                    <div class="play-tri"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

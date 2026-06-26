@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAE - 定价</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+        }
+        header.nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+        }
+
+            .nav-links a {
+                color: #ccc;
+                text-decoration: none;
+                font-size: 14px;
+            }
+
+                .nav-links a.hot-tag {
+                    position: relative;
+                }
+
+                    .nav-links a.hot-tag::after {
+                        content: "Hot";
+                        font-size: 10px;
+                        background: #36e079;
+                        color: #000;
+                        padding: 1px 4px;
+                        border-radius: 3px;
+                        margin-left: 4px;
+                    }
+
+        .nav-right {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-login {
+            background: #222;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .btn-download {
+            background: #36e079;
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 2px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .page-title-wrap {
+            text-align: center;
+            margin: 40px 0 50px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            color: #aaa;
+            font-size: 16px;
+        }
+
+            .page-subtitle a {
+                color: #36e079;
+                text-decoration: none;
+            }
+        .pricing-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .price-card {
+            flex: 1;
+            background: #121212;
+            border: 1px solid #222;
+            padding: 30px 24px;
+            border-radius: 4px;
+        }
+
+            .price-card.highlight {
+                border-color: #36e079;
+            }
+
+        .card-title {
+            color: #36e079;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tag-discount {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .card-price {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+
+            .card-price small {
+                font-size: 14px;
+                color: #aaa;
+                font-weight: normal;
+            }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+            .card-features li {
+                color: #ddd;
+                margin: 12px 0;
+                font-size: 14px;
+            }
+
+                .card-features li::before {
+                    content: "✓";
+                    color: #36e079;
+                    margin-right: 8px;
+                }
+
+        .card-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .btn-gray {
+            background: #222;
+            color: #fff;
+        }
+
+        .btn-green {
+            background: #36e079;
+            color: #000;
+            font-weight: 500;
+        }
+
+        .express-card {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #121212;
+            padding: 24px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #222;
+            border-radius: 4px;
+        }
+
+        .express-left .express-title {
+            color: #f7d046;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .express-left .express-price {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .express-left .express-price small {
+                font-size: 13px;
+                color: #999;
+                text-decoration: line-through;
+                margin-left: 8px;
+            }
+
+        .express-features {
+            list-style: none;
+        }
+
+            .express-features li {
+                margin: 8px 0;
+                font-size: 14px;
+                color: #ddd;
+            }
+
+                .express-features li::before {
+                    content: "✓";
+                    color: #36e079;
+                    margin-right: 8px;
+                }
+    </style>
+</head>
+<body>
+    <header class="nav-bar">
+        <div class="nav-left">
+            <div class="logo">TRAE</div>
+            <div class="nav-links">
+                <a href="wangyedazuoye.html">产品 ∨</a>
+                <a href="#">企业版</a>
+                <a href="#">定价</a>
+                <a href="#">文档</a>
+                <a href="hsiyan.html">更新日志</a>
+                <a href="#">社区</a>
+                <a href="#" class="hot-tag">创造力大赛</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="btn-login">登录</button>
+            <button class="btn-download">下载中心</button>
+        </div>
+    </header>
+    <div class="page-title-wrap">
+        <h1 class="page-title">个人方案与定价</h1>
+        <p class="page-subtitle">企业版选型与咨询，前往<a href="#">火山引擎</a> ↗</p>
+    </div>->
+    <div class="pricing-container">
+        <div class="price-card">
+            <div class="card-title">免费</div>
+            <div class="card-price">¥0</div>
+            <ul class="card-features">
+                <li>所有功能均可免费使用</li>
+                <li>支持 2 个云端任务同时执行</li>
+            </ul>
+            <button class="card-btn btn-gray">免费使用</button>
+        </div>
+        <div class="price-card highlight">
+            <div class="card-title">
+                速通Pro
+                <span class="tag-discount">新用户限时优惠</span>
+            </div>
+            <div class="card-price">低至 ¥59 <small>/月 ¥99</small></div>
+            <ul class="card-features">
+                <li>每月 100 次免排队速通次数</li>
+                <li>支持 10 个云端任务同时执行</li>
+            </ul>
+            <button class="card-btn btn-green">立即升级</button>
+        </div>
+        <div class="price-card">
+            <div class="card-title">速通Pro+</div>
+            <div class="card-price">¥239 <small>/月</small></div>
+            <ul class="card-features">
+                <li>每月 300 次免排队速通次数</li>
+                <li>支持 10 个云端任务同时执行</li>
+            </ul>
+            <button class="card-btn btn-gray">立即升级</button>
+        </div>
+        <div class="price-card">
+            <div class="card-title">速通Ultra</div>
+            <div class="card-price">¥699 <small>/月</small></div>
+            <ul class="card-features">
+                <li>每月 1000 次免排队速通次数</li>
+                <li>支持 20 个云端任务同时执行</li>
+                <li>优先解锁 SOTA 模型</li>
+            </ul>
+            <button class="card-btn btn-gray">立即升级</button>
+        </div>
+    </div>
+    <div class="express-card">
+        <div class="express-left">
+            <div class="express-title">优速通 Express <span style="font-size:12px;color:#aaa;">限量发售</span></div>
+            <div class="express-price">低至 ¥1399 <small>/月 ¥4999</small></div>
+        </div>
+        <ul class="express-features">
+            <li>有效期内无限次免排队速通次数</li>
+            <li>支持 20 个云端任务同时执行</li>
+            <li>优先解锁 SOTA 模型</li>
+        </ul>
+        <button class="card-btn btn-gray" style="width:140px;">立即升级</button>
+    </div>
+</body>
+</html>

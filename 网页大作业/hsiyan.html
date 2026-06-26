@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新日志 - TRAE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            font-family: "宋体", SimSun, serif;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+                pointer-events: none;
+        }
+        
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            padding-top: 56px;
+            min-height: 100vh;
+            position: relative;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
+            background-color: #000;
+            border-bottom: 1px solid #222;
+            z-index: 999;
+        }
+        .nav-container {
+            width: 96%;
+            max-width: 1440px;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .menu-item {
+            position: relative;
+            height: 56px;
+            line-height: 56px;
+        }
+        .menu-item > a {
+            color: #cccccc;
+            font-size: 14px;
+        }
+        .menu-item > a:hover {
+            color: #fff;
+        }
+        .product-dropdown {
+            display: none;
+            position: absolute;
+            top: 56px;
+            left: 0;
+            width: 180px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+        .product-dropdown li {
+            padding: 10px 16px;
+        }
+        .product-dropdown li a {
+            color: #ccc;
+            font-size: 14px;
+            display: block;
+        }
+        .product-dropdown li:hover {
+            background-color: #222;
+        }
+        .product-item:hover .product-dropdown {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .login-btn {
+            color: #ccc;
+            font-size: 14px;
+        }
+        .download-btn {
+            padding: 6px 16px;
+            background-color: #29c870;
+            color: #000;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 60px auto 0;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        .title-box {
+            text-align: center;
+            padding: 20px 30px;
+            background: rgba(40,40,40,0.3);
+        }
+        .top-tag {
+            font-size: 12px;
+            color: #29c870;
+            margin-bottom: 8px;
+        }
+        .main-title {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #29c870, #42e0ff);
+            background-clip: text;
+            color: transparent;
+        }
+        .sub-desc {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        .more-btn {
+            padding: 4px 12px;
+            background: #222;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 2px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .log-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .log-list::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: none;
+            border-left: 1px dashed #666;
+            z-index: 1;
+        }
+        .log-item {
+            padding: 12px 16px;
+            background: rgba(40,40,40,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        .log-item.dash-left {
+            margin-left: 6px;
+            padding-left: 16px;
+            border-left: 1px dashed #666;
+            z-index: 3;
+        }
+        .log-date {
+            font-size: 13px;
+            color: #29c870;
+            margin-bottom: 6px;
+        }
+        .log-version {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+        .log-feature {
+            padding-left: 20px;
+        }
+        .log-feature li {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.6;
+            list-style: disc;
+            margin: 4px 0;
+        }
+        .log-item::before {
+            content: "";
+            position: absolute;
+            left: -25px;
+            top: 14px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #29c870;
+        }
+        .log-item.dash-left::before {
+            left: -31px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="首页.html" class="logo">TRAE</a >
+                <ul class="nav-menu">
+                    <li class="menu-item product-item">
+                        <a href="#">产品 ▾</a >
+                        <ul class="product-dropdown">
+                            <li><a href="wangyedazuoye.html">TRAE Work</a ></li>
+                            <li><a href="#">TRAE IDE</a ></li>
+                            <li><a href="#">TRAE 插件</a ></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="#">企业版</a ></li>
+                    <li class="menu-item"><a href="dingjia.html">定价</a ></li>
+                    <li class="menu-item"><a href="#">文档</a ></li>
+                    <li class="menu-item"><a href="#">更新日志</a ></li>
+                    <li class="menu-item"><a href="#">社区</a ></li>
+                    <li class="menu-item"><a href="#">知识库</a ></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <span class="login-btn">登录</span>
+                <a href="#" class="download-btn">下载中心</a >
+            </div>
+        </div>
+    </header>
+    <div class="wrap">
+        <div class="title-box">
+            <div class="top-tag">更新日志</div>
+            <h2 class="main-title">探索 TRAE 的<span class="gradient-text">最新动态</span></h2>
+            <p class="sub-desc">随时掌握 TRAE 的变化，了解我们为您带来的创新与优化</p >
+            <button class="more-btn">了解更多</button>
+        </div>
+        <div class="log-list">
+            <div class="log-item">
+                <div class="log-date">2026-06-09</div>
+                <div class="log-version">v8.6.8  TRAE APP</div>
+                <ul class="log-feature">
+                    <li>TRAE APP 支持对登录设备删除/重命名的操作。</li>
+                    <li>TRAE APP 可选择内置模型、自定义义模型、其他模型等。</li>
+                </ul>
+            </div>
+            <div class="log-item dash-left">
+                <div class="log-date">2026-06-09</div>
+                <div class="log-version">v8.1.18  TRAE Work</div>
+                <ul class="log-feature">
+                    <li>TRAE SOLO 升级为 TRAE Work。</li>
+                    <li>TRAE Work 支持企业账号登录。</li>
+                </ul>
+            </div>
+            <div class="log-item">
+                <div class="log-date">2026-06-08</div>
+                <div class="log-version">v8.1.16~v8.1.17  TRAE Work</div>
+                <ul class="log-feature">
+                    <li>修复了一些线上已知问题。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+        const particles = [];
+        const particleNum = Math.floor(window.innerWidth / 10);
+        for (let i = 0; i < particleNum; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 0.5,
+                speedX: (Math.random() - 0.5) * 0.3,
+                speedY: (Math.random() - 0.5) * 0.3,
+                color: `rgba(110, 110, 110, ${Math.random() * 0.5 + 0.2})`
+            });
+        }
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+            });
+            requestAnimationFrame(render);
+        }
+        render()
+    </script>
+</body>
+</html>
